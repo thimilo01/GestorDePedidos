@@ -8,13 +8,13 @@ public interface ObjectMapperUtil {
 
     static ObjectMapper mapper = new ObjectMapper();
 
-    static <T> T convertTo(Object value,Class<T> clazz){
+    static <T> T convertTo(Object value, Class<T> clazz) {
         mapper.registerModule(new JavaTimeModule());
         return (T) mapper.convertValue(value, clazz);
     }
 
     @SneakyThrows
-    static <T> T convertMsgTo(String value, Class<T> clazz){
+    static <T> T convertMsgTo(String value, Class<T> clazz) {
         mapper.registerModule(new JavaTimeModule());
         return (T) mapper.readValue(value, clazz);
     }

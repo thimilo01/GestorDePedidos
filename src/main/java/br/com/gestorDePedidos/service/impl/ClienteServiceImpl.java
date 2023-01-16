@@ -1,52 +1,62 @@
 package br.com.gestorDePedidos.service.impl;
 
-import br.com.gestorDePedidos.dto.ClienteDto;
 import br.com.gestorDePedidos.entity.Cliente;
 import br.com.gestorDePedidos.exception.NaoEncontradoException;
 import br.com.gestorDePedidos.repository.ClienteRepository;
 import br.com.gestorDePedidos.service.ClienteService;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
+@Slf4j
 public class ClienteServiceImpl implements ClienteService {
 
-    @Autowired
-    private ClienteRepository repository;
+    private static final int VALOR_INICIAL = 1;
 
+    private final ClienteRepository repository;
 
     @Override
     public Cliente buscarClientePorId(int codigoCliente) {
         Optional<Cliente> cliente = repository.findById(codigoCliente);
-        if(cliente.isPresent()){
+        if (cliente.isPresent()) {
             return cliente.get();
-        };
+        }
         throw new NaoEncontradoException("Não encontramos nenhum cliente com esse código!");
     }
 
     @Override
     public void criarCliente(int codigoCliente) {
         Cliente cliente = clienteExistente(codigoCliente);
-        if(Objects.isNull(cliente)){
+        if (Objects.isNull(cliente)) {
+            log.info("---Inserindo novo cliente ----");
             repository.save(Cliente.builder()
                     .codigoCliente(codigoCliente)
-                    .totalPedidosCliente(1)
+                    .totalPedidosCliente(VALOR_INICIAL)
                     .build());
-        }else {
+        } else {
+            log.info("---Atualizando cliente ----");
             repository.save(Cliente.builder()
                     .codigoCliente(cliente.getCodigoCliente())
-                    .totalPedidosCliente(cliente.getTotalPedidosCliente() + 1)
+                    .totalPedidosCliente(cliente.getTotalPedidosCliente() + VALOR_INICIAL)
                     .build());
         }
     }
 
-    private Cliente clienteExistente(int codigoCliente){
+    @Override
+    public List<Cliente> buscarTodos() {
+        return repository.findAll();
+    }
+
+    private Cliente clienteExistente(int codigoCliente) {
         Optional<Cliente> cliente = repository.findById(codigoCliente);
-        if(cliente.isPresent()){
+        if (cliente.isPresent()) {
             return cliente.get();
-        };
+        }
         return null;
     }
 }

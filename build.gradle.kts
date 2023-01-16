@@ -30,7 +30,11 @@ dependencies {
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	{
+		exclude("org.mockito", "mockito-core")
+	}
 	testImplementation("org.springframework.amqp:spring-rabbit-test")
+	testImplementation("org.mockito:mockito-core:4.11.0")
 }
 dependencyManagement {
 	imports {

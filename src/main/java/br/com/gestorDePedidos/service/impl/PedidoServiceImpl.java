@@ -14,16 +14,18 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
+@Slf4j
 public class PedidoServiceImpl implements PedidoService {
-    @Autowired
-    private PedidoRepository repository;
 
-    @Autowired
-    private ClienteService clienteService;
+    private final PedidoRepository repository;
+
+    private final ClienteService clienteService;
 
     private float valorTotal;
 
@@ -44,17 +46,17 @@ public class PedidoServiceImpl implements PedidoService {
         if (pedido.isPresent()) {
             return pedido.get();
         }
-        ;
         throw new NaoEncontradoException("Não encontramos nenhum pedido com esse código!");
     }
 
     @Override
     public List<Pedido> buscarPedidosPorCliente(int codigoCliente) {
-        Cliente cliente =  clienteService.buscarClientePorId(codigoCliente);
+        Cliente cliente = clienteService.buscarClientePorId(codigoCliente);
         return repository.findByCliente(cliente);
     }
 
     private List<Item> ConvertListSomaTotalPedido(List<ItemDto> itensDto) {
+        log.info("--- Validação para inserção ---");
         valorTotal = 0;
         List<Item> itens = new ArrayList<>();
         itensDto.forEach(item -> {
