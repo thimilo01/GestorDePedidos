@@ -1,9 +1,12 @@
 package br.com.gestorDePedidos.service;
 
-import br.com.gestorDePedidos.entity.Pedido;
-import java.util.List;
+
+import br.com.gestorDePedidos.entity.Cliente;
 
 public interface ClienteService {
-    public List<Pedido> listaPedidos(int codigoCliente);
+
+    public Cliente buscarClientePorId(int codigoCliente);
+
+    public void criarCliente(int codigoCliente);
 
 }

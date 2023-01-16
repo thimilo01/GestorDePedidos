@@ -20,12 +20,24 @@ public class PedidoController {
     @GetMapping(value = "/{codigoPedido}")
     public ResponseEntity get(@PathVariable int codigoPedido) {
         try {
-            return ResponseEntity.ok(service.buscarPedido(codigoPedido));
+            return ResponseEntity.ok(service.buscarPedidoPorId(codigoPedido));
 
         } catch (NaoEncontradoException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
         } catch (Exception ex){
            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
+        }
+    }
+
+    @GetMapping(value = "/porcliente/{codigoCliente}")
+    public ResponseEntity getPedidosPorCliente(@PathVariable int codigoCliente) {
+        try {
+            return ResponseEntity.ok(service.buscarPedidosPorCliente(codigoCliente));
+
+        } catch (NaoEncontradoException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+        } catch (Exception ex){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
         }
     }
 

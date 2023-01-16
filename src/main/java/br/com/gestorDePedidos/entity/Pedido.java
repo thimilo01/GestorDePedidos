@@ -17,7 +17,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Pedido {
     @Id
     private int codigoPedido;
-    private int codigoCliente;
+    @DBRef
+    private Cliente cliente;
     private float valorTotal;
     private LocalDateTime dataPedido;
     private List<Item> items;

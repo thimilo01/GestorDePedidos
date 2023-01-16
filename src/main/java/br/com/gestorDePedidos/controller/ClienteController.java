@@ -21,7 +21,7 @@ public class ClienteController {
     @GetMapping("/{codigoCliente}")
     public ResponseEntity consultarPedidos(@PathVariable int codigoCliente) {
         try {
-            return ResponseEntity.ok(service.listaPedidos(codigoCliente));
+            return ResponseEntity.ok(service.buscarClientePorId(codigoCliente));
         } catch (NaoEncontradoException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
         } catch (Exception ex) {
