@@ -1,0 +1,16 @@
+{
+  "codigoPedido": 10,
+  "codigoCliente":1,
+  "itens": [
+    {
+      "produto": "Cerveja",
+      "quantidade": 100,
+      "preco": 5.25
+    },
+    {
+      "produto": "Caipirinha",
+      "quantidade": 10,
+      "preco": 15.00
+    }
+  ]
+}

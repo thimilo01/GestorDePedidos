@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  message-broker:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: gestor-pedido-broker
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - messaging
+    volumes: 
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./definitions.json:/etc/rabbitmq/definitions.json
+
+networks: 
+    messaging:
+      driver: bridge

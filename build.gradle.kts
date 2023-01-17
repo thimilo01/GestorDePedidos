@@ -16,18 +16,30 @@ configurations {
 
 repositories {
 	mavenCentral()
+	gradlePluginPortal()
 }
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-amqp")
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.springdoc:springdoc-openapi-ui:1.6.14")
+	implementation("com.fasterxml.jackson.core:jackson-databind:2.14.0")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.0")
 	compileOnly("org.projectlombok:lombok")
+
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	{
+		exclude("org.mockito", "mockito-core")
+	}
 	testImplementation("org.springframework.amqp:spring-rabbit-test")
+	testImplementation("org.mockito:mockito-core:4.11.0")
+}
+dependencyManagement {
+	imports {
+		mavenBom ("org.springframework.cloud:spring-cloud-dependencies:2021.0.4")
+	}
 }
 
 tasks.withType<Test> {
