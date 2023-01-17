@@ -31,6 +31,19 @@ Obs: Os docker também estão localizados no caminho ("/gestorDePedidos/src/main
 
 Após instalação e configuração será necessário subir as imagens docker's
 
+### Comandos docker-compose 
+subir contêiner:
+* docker-compose up -d
+
+parar contêiner:
+* docker-compose stop
+
+remover todos contêiner:
+* docker-compose rm -f
+
+listar contêineres:
+* docker ps -a
+
 ### Configurações link's:
 
 [RabbitMQ local](http://localhost:15672/#/)
@@ -38,6 +51,8 @@ Após instalação e configuração será necessário subir as imagens docker's
 [Mongoexpress local](http://localhost:8083)
 
 [Swagger local](http://localhost:8080/swagger-ui/index.html#/)
+
+ * swagger json: "resources/swagger/swagger.json"
 
 ## Technologies
 
