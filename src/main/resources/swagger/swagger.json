@@ -1,0 +1,165 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/pedido/{codigoPedido}": {
+      "get": {
+        "tags": [
+          "pedido-controller"
+        ],
+        "summary": "Consulta de pedido detalhado por ID",
+        "operationId": "get",
+        "parameters": [
+          {
+            "name": "codigoPedido",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pedido/total/{codigoPedido}": {
+      "get": {
+        "tags": [
+          "pedido-controller"
+        ],
+        "summary": "Valor total do pedido",
+        "operationId": "getTotalpedido",
+        "parameters": [
+          {
+            "name": "codigoPedido",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pedido/porcliente/{codigoCliente}": {
+      "get": {
+        "tags": [
+          "pedido-controller"
+        ],
+        "summary": "Pedidos realizados pelo cliente",
+        "operationId": "getPedidosPorCliente",
+        "parameters": [
+          {
+            "name": "codigoCliente",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cliente": {
+      "get": {
+        "tags": [
+          "cliente-controller"
+        ],
+        "summary": "Todos clientes e total de pedidos",
+        "operationId": "getAll",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cliente/{codigoCliente}": {
+      "get": {
+        "tags": [
+          "cliente-controller"
+        ],
+        "summary": "Consulta de total de pedidos por cliente",
+        "operationId": "get_1",
+        "parameters": [
+          {
+            "name": "codigoCliente",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {}
+}
